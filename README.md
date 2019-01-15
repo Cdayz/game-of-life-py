@@ -36,11 +36,11 @@ state_new = [
 from gol.img_backend.pillow_backend import ImgBackend
 
 def create_image(state):
-    bc = ImgBackend('test.png', (len(state), len(state[0])), (1, 1),
+    bc = ImgBackend((len(state), len(state[0])), (1, 1),
                     line_width=1)
     img = bc.to_image(state)
 
-    img.save(bc.img_path.as_posix())
+    img.save('test.png')
 
 state = [
     [0, 0, 0, 0, 0],
