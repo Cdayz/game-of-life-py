@@ -2,7 +2,6 @@
 Module wich represents main logics of Conway Game of Life
 """
 import copy
-from collections import Counter
 from typing import List, Tuple
 
 Point = Tuple[int, int]
@@ -45,14 +44,16 @@ def next_cell_state(state: State, point: Point) -> int:
 
     lives = len(live_neighbors)
 
-    x, y = point
-    cell_state = state[x][y]
+    x_point, y_point = point
+    cell_state = state[x_point][y_point]
 
     if cell_state == 1 and (lives < 2 or lives > 3):
         return 0
 
-    elif (cell_state == 1 and lives >= 2) or (cell_state == 0 and lives == 3):
+    if (cell_state == 1 and lives >= 2) or (cell_state == 0 and lives == 3):
         return 1
+
+    return cell_state
 
 
 def cell_neighbors(state: State, point: Point, width: int = 1) -> List[int]:
@@ -71,17 +72,17 @@ def cell_neighbors(state: State, point: Point, width: int = 1) -> List[int]:
     :rtype: List[int]
     """
     result = []
-    xp, yp = point
+    x_point, y_point = point
 
-    for row in range(xp - width, xp + width + 1):
-        for column in range(yp - width, yp + width + 1):
+    for row in range(x_point - width, x_point + width + 1):
+        for column in range(y_point - width, y_point + width + 1):
             if row < 0 or column < 0:
                 continue
 
             if row >= len(state) or column >= len(state[0]):
                 continue
 
-            if row == xp and column == yp:
+            if row == x_point and column == y_point:
                 continue
 
             result.append(state[row][column])
