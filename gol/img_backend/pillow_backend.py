@@ -55,10 +55,6 @@ class ImgBackend:
             for y_index in range(0, self.img_h, y_step):
                 image.putpixel((x_index, y_index), 180)
 
-        for x_index in range(0, self.img_h, x_step):
-            for y_index in range(0, self.img_w, y_step):
-                image.putpixel((x_index, y_index), 180)
-
         return image
 
     def to_image(self, state: State):
@@ -101,9 +97,8 @@ class ImgBackend:
         x_start = (self.cell_h + self.line_width) * x_point + self.line_width
         y_start = (self.cell_w + self.line_width) * y_point + self.line_width
 
-
         for x_index in range(x_start, x_start + self.cell_h):
             for y_index in range(y_start, y_start + self.cell_w):
-                img.putpixel((y_index, x_index), value)
+                img.putpixel((x_index, y_index), value)
 
         return img
